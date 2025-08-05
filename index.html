@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Nhập pass đi người đẹp</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600;700&family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --main-bg: #f7faff;
+      --card-bg: #fff;
+      --shadow: 0 4px 32px #b9b9c44d, 0 1.5px 6px #e7e7e7;
+      --accent: #b85cff;
+      --accent2: #e46bc2;
+      --success: #4ade80;
+      --error: #e11d48;
+      --gray: #d1d5db;
+      --btn-hover: #fff0fb;
+    }
+    body {
+      min-height: 100vh;
+      background: var(--main-bg);
+      margin: 0;
+      font-family: 'Quicksand', Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .title {
+      text-align: center;
+      font-size: 2.4rem;
+      font-family: 'Pacifico', 'Quicksand', Arial, sans-serif;
+      font-weight: 700;
+      margin-top: 2.5rem;
+      margin-bottom: 2.2rem;
+      color: var(--accent2);
+      letter-spacing: 1px;
+      text-shadow: 0 2px 0 #fff, 0 4px 12px #d1d5db66, 0 2px 14px #e46bc244;
+      user-select: none;
+      animation: fadeInDown 1s cubic-bezier(.7,.03,.41,.92);
+    }
+    @keyframes fadeInDown {
+      0% { opacity: 0; transform: translateY(-30px);}
+      100% { opacity: 1; transform: none;}
+    }
+    .passbox {
+      background: var(--card-bg);
+      border-radius: 1.7rem;
+      box-shadow: var(--shadow);
+      padding: 2.2rem 2.6rem;
+      display: flex;
+      align-items: center;
+      gap: 2.4rem;
+      max-width: 500px;
+      margin: 0 auto;
+      animation: fadeInUp 1.3s cubic-bezier(.7,.03,.41,.92);
+    }
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(30px);}
+      100% { opacity: 1; transform: none;}
+    }
+    .avatar {
+      width: 140px;
+      height: 140px;
+      border-radius: 22px;
+      object-fit: cover;
+      box-shadow: 0 8px 24px #eeb4e088, 0 2px 6px #e7e7e7;
+      background: #fff;
+      display: block;
+      border: 3px solid #ffe0f8;
+      transition: box-shadow .32s;
+      animation: popIn 1.2s cubic-bezier(.7,.03,.41,.92);
+    }
+    @keyframes popIn {
+      0% { opacity: 0; transform: scale(.7);}
+      70% { opacity: 1; transform: scale(1.1);}
+      100% { opacity: 1; transform: scale(1);}
+    }
+    .input-panel {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .pw-dots {
+      letter-spacing: 0.45em;
+      font-size: 2.1rem;
+      background: #f4f5fb;
+      border-radius: 0.8em;
+      padding: 0.36em 1.12em;
+      margin-bottom: 1.1em;
+      width: 196px;
+      min-height: 2.25em;
+      text-align: center;
+      border: none;
+      outline: none;
+      font-family: inherit;
+      font-weight: 700;
+      color: #222;
+      box-shadow: 0 2px 8px #e8e0ff2a;
+      transition: box-shadow .15s, border .2s;
+      user-select: none;
+    }
+    .pw-dots.shake {
+      animation: shake .23s;
+      border: 2px solid var(--error);
+    }
+    @keyframes shake {
+      0% {transform: translateX(0);}
+      20%{transform:translateX(-7px);}
+      45%{transform:translateX(6px);}
+      60%{transform:translateX(-5px);}
+      80%{transform:translateX(4px);}
+      100%{transform:translateX(0);}
+    }
+    .numpad {
+      display: grid;
+      grid-template-columns: repeat(3, 56px);
+      grid-gap: 0.7em;
+    }
+    .num-btn, .act-btn {
+      background: #f9f9fa;
+      border: none;
+      border-radius: 0.8em;
+      font-size: 1.34rem;
+      font-weight: 700;
+      box-shadow: 0 2.5px 8px #e7e7e7ab;
+      color: #444;
+      padding: 0.68em 0;
+      cursor: pointer;
+      transition: 
+        background 0.18s, 
+        color 0.18s, 
+        transform .16s, 
+        box-shadow .19s;
+      user-select: none;
+      outline: none;
+      margin: 0;
+      will-change: transform;
+    }
+    .num-btn:active, .act-btn:active {
+      background: #ece7f1;
+      color: var(--accent);
+      transform: scale(0.94);
+      box-shadow: 0 1px 4px #c4b1e955;
+    }
+    .num-btn:hover, .act-btn:hover {
+      background: var(--btn-hover);
+    }
+    .act-btn {
+      color: #fff;
+      background: #b7b9bb;
+      font-size: 1.35rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .act-btn.check {
+      background: linear-gradient(135deg, #b85cff 10%, #e46bc2 90%);
+      color: #fff;
+      box-shadow: 0 4px 18px #e46bc244;
+      font-size: 1.25rem;
+    }
+    .act-btn.cancel {
+      background: var(--gray);
+      color: #888;
+    }
+    .msg {
+      min-height: 1.5em;
+      font-size: 1.17em;
+      margin-top: 0.8em;
+      text-align: center;
+      font-family: 'Quicksand', Arial, sans-serif;
+      font-weight: 700;
+      transition: color .2s;
+      user-select: none;
+    }
+    .msg.error { color: var(--error);}
+    .msg.ok { color: var(--success);}
+    @media (max-width: 600px) {
+      .passbox {
+        flex-direction: column;
+        padding: 1.3rem 0.7rem;
+        gap: 1.2rem;
+      }
+      .avatar {
+        width: 110px; height: 110px;
+      }
+      .pw-dots { width: 135px; font-size: 1.4rem;}
+      .numpad { grid-template-columns: repeat(3, 44px);}
+    }
+  </style>
+</head>
+<body>
+  <div class="title">NHẬP PASS ĐI NGƯỜI ĐẸP</div>
+  <div class="passbox">
+    <img class="avatar" src="https://i.imgur.com/4M34hi2.png" alt="avatar" />
+    <div class="input-panel">
+      <div id="pw-dots" class="pw-dots"></div>
+      <div class="numpad" id="numpad"></div>
+      <div class="msg" id="msg"></div>
+    </div>
+  </div>
+  <script>
+    // Đặt pass đúng ở đây
+    const CORRECT_PASS = "123456";
+    // Đổi link chuyển tới ở đây
+    const REDIRECT_URL = "https://www.google.com/";
+
+    // Ảnh avatar: đổi src ở <img> nếu muốn ảnh khác
+
+    const pwDots = document.getElementById('pw-dots');
+    const msg = document.getElementById('msg');
+    const numpad = document.getElementById('numpad');
+    let pw = "";
+
+    function renderDots() {
+      pwDots.textContent = "•".repeat(pw.length);
+    }
+
+    function resetPw() {
+      pw = "";
+      renderDots();
+      msg.textContent = "";
+      msg.className = "msg";
+      pwDots.classList.remove("shake");
+    }
+
+    function handleNum(num) {
+      if (pw.length < 6) {
+        pw += num;
+        renderDots();
+        msg.textContent = "";
+        msg.className = "msg";
+        pwDots.classList.remove("shake");
+      }
+    }
+
+    function handleCheck() {
+      if (pw === CORRECT_PASS) {
+        msg.className = "msg ok";
+        msg.textContent = "Chính xác! Đang chuyển trang ...";
+        pwDots.classList.remove("shake");
+        setTimeout(() => { window.location.href = REDIRECT_URL; }, 950);
+      } else {
+        msg.className = "msg error";
+        msg.textContent = "Sai pass rồi 😢";
+        pwDots.classList.add("shake");
+        pw = "";
+        renderDots();
+        setTimeout(()=>pwDots.classList.remove("shake"), 400);
+      }
+    }
+
+    function handleCancel() {
+      resetPw();
+    }
+
+    function createNumpad() {
+      // 1-9
+      for (let i = 1; i <= 9; ++i) {
+        let btn = document.createElement('button');
+        btn.type = 'button';
+        btn.textContent = i;
+        btn.className = 'num-btn';
+        btn.onclick = () => handleNum(i);
+        numpad.appendChild(btn);
+      }
+      // Check, 0, Cancel
+      let btnCheck = document.createElement('button');
+      btnCheck.type = 'button';
+      btnCheck.innerHTML = '✓';
+      btnCheck.className = 'act-btn check';
+      btnCheck.onclick = handleCheck;
+      numpad.appendChild(btnCheck);
+
+      let btn0 = document.createElement('button');
+      btn0.type = 'button';
+      btn0.textContent = "0";
+      btn0.className = 'num-btn';
+      btn0.onclick = () => handleNum(0);
+      numpad.appendChild(btn0);
+
+      let btnCancel = document.createElement('button');
+      btnCancel.type = 'button';
+      btnCancel.innerHTML = '✗';
+      btnCancel.className = 'act-btn cancel';
+      btnCancel.onclick = handleCancel;
+      numpad.appendChild(btnCancel);
+    }
+
+    createNumpad();
+    resetPw();
+  </script>
+</body>
+</html>
